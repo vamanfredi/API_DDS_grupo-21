@@ -18,7 +18,8 @@ class Comunidad(BaseModel):
     gradoDeConfianza: float
     establecimientos: List[Establecimiento]
     servicios: List[Servicio]
-
+class PropuestaResponse(BaseModel):
+    comunidades: List[Comunidad]
 app = FastAPI()
 
 
@@ -50,7 +51,8 @@ async def propose_fusion(request: Request, comunidad: Comunidad, lista_comunidad
         match_confianza = comunidad.gradoDeConfianza == c.gradoDeConfianza 
         if match_confianza and match_miembros  and c.nombre != comunidad.nombre and match_establecimientos and match_servicios :
             comunidades_fusionables.append(c)
-
+    response: PropuestaResponse
+    response.comunidades = comunidades_fusionables
     if len(comunidades_fusionables) > 0:
         return comunidades_fusionables
     else:
