@@ -51,7 +51,7 @@ async def propose_fusion(request: Request, comunidad: Comunidad, lista_comunidad
         if match_confianza and match_miembros  and c.nombre != comunidad.nombre and match_establecimientos and match_servicios :
             comunidades_fusionables.append(c)
             
-    print(comunidades_fusionables)
+    print(len(comunidades_fusionables))
     
     if len(comunidades_fusionables) > 0:
         return comunidades_fusionables
