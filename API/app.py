@@ -18,6 +18,7 @@ class Comunidad(BaseModel):
     gradoDeConfianza: float
     establecimientos: List[Establecimiento]
     servicios: List[Servicio]
+    
 class PropuestaResponse(BaseModel):
     comunidades: List[Comunidad]
 app = FastAPI()
@@ -54,7 +55,7 @@ async def propose_fusion(request: Request, comunidad: Comunidad, lista_comunidad
     response: PropuestaResponse
     response.comunidades = comunidades_fusionables
     if len(comunidades_fusionables) > 0:
-        return comunidades_fusionables
+        return response
     else:
         raise HTTPException(status_code=400, detail="No se encontró una comunidad adecuada para la fusión")
 
